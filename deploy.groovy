@@ -7,11 +7,40 @@ pipeline {
       label 'master'
     }
     stages {
-        stage('Checkout SCM') {
+         stage('Checkout Code Angular') {
 
             steps {
-                echo "tttttttttttttttt"
+                git branch: 'master',
+                credentialsId: 'a2432c58-e773-4594-a45f-e6ddd1d60e41',
+                url: 'https://github.com/fotopieces/myweb.git'
             }
+        }
+         stage('Build Angular') {
+
+            steps {
+                sh """
+                    cd myweb &&
+                    npm install &&
+                    ng build --prod &&
+                 """
+            }
+        }
+        stage('Push to registry') {
+            echo (
+                "pushing to registry url: 'https://hub.docker.com/repository/docker/fotopiece/myweb' " +
+                "with credentials: '9f98c373-03dd-4eb5-bf0d-411f57a59033'"
+            )
+            docker.withRegistry("https://hub.docker.com/repository/docker/fotopiece/myweb", 9f98c373-03dd-4eb5-bf0d-411f57a59033) {
+                newImage.push()
+                if (pushLatest)
+                    newImage.push("latest")
+            }
+        }
+        stage('Clear') {
+            sh """
+            cd .. &&
+            rm -rf myweb
+            """
         }
     }
 }
