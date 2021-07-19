@@ -18,8 +18,6 @@ pipeline {
 
             steps {
                 sh """
-                    cd work &&
-                    cd myweb &&
                     npm install &&
                     ng build --prod &&
                  """
