@@ -10,19 +10,18 @@ pipeline {
          stage('Checkout Code Angular') {
 
             steps {
-                sh """
-                    mkdir work &&
-                    cd work &&
-                 """
-                git branch: 'master',
-                credentialsId: 'a2432c58-e773-4594-a45f-e6ddd1d60e41',
-                url: 'https://github.com/fotopieces/myweb.git'
+                dir ('work') {
+                    git branch: 'master',
+                    credentialsId: 'a2432c58-e773-4594-a45f-e6ddd1d60e41',
+                    url: 'https://github.com/fotopieces/myweb.git'
+                }
             }
         }
          stage('Build Angular') {
 
             steps {
                 sh """
+                    cd work &&
                     cd myweb &&
                     npm install &&
                     ng build --prod &&
