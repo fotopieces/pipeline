@@ -18,21 +18,7 @@ pipeline {
          stage('Build Angular') {
 
             steps {
-                bat """
-                    npm install &&
-                    build --prod
-                """
-            }
-        }
-        
-        
-        stage('Clear') {
-            steps {
-                sh """
-                    cd .. &&
-                    cd .. &&
-                    rm -rf work
-                """
+                sh "chmod 777"
             }
         }
     }
