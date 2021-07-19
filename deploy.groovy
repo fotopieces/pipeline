@@ -33,6 +33,7 @@ pipeline {
                         newImage.push("latest")
                     }
                 } 
+            }
         }
         
         stage('Clear') {
@@ -43,5 +44,5 @@ pipeline {
                 """
             }
         }
-    }
 }
+
