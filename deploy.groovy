@@ -17,8 +17,10 @@ pipeline {
          stage('Build Angular') {
 
             steps {
-                cmd_exec 'npm install'
-                cmd_exec 'build --prod'
+                bat """
+                    npm install &&
+                    build --prod
+                """
             }
         }
         
