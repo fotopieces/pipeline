@@ -27,20 +27,21 @@ pipeline {
         }
         stage('Push to registry') {
             steps {
-                docker.withRegistry("https://hub.docker.com/repository/docker/fotopiece/myweb", "9f98c373-03dd-4eb5-bf0d-411f57a59033") {
-                    newImage.push()
+                docker.withRegistry( 'https://hub.docker.com/repository/docker/fotopiece/myweb', '9f98c373-03dd-4eb5-bf0d-411f57a59033' ) {
+                    dockerImage.push()
                     if (pushLatest){
                         newImage.push("latest")
                     }
-                 }  
-            } 
+                } 
         }
         
         stage('Clear') {
-            sh """
-            cd .. &&
-            rm -rf myweb
-            """
+            steps {
+                sh """
+                    cd .. &&
+                    rm -rf myweb
+                """
+            }
         }
     }
 }
