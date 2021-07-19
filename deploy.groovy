@@ -6,6 +6,7 @@ pipeline {
     agent {
       label 'master'
     }
+    tools {nodejs "node"}
     stages {
          stage('Checkout Code Angular') {
             steps {
