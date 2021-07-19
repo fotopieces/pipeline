@@ -4,7 +4,7 @@ pipeline {
     /* Specify where entire pipeline will execute */
     // agent any
     agent {
-      label 'my-k8s'
+      label 'master'
     }
     stages {
         stage('Checkout SCM') {
