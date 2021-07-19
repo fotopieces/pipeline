@@ -6,4 +6,12 @@ pipeline {
     agent {
       label 'my-k8s'
     }
+    stages {
+        stage('Checkout SCM') {
+
+            steps {
+                echo "tttttttttttttttt"
+            }
+        }
+    }
 }
